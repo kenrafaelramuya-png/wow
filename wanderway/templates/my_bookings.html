@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Bookings | WanderWay Travel & Tours</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #57384b;
+            background: linear-gradient(135deg, #fff7fb, #fde8f2);
+        }
+
+        header {
+            background: #fff;
+            padding: 18px 5%;
+            box-shadow: 0 3px 15px #0000000b;
+        }
+
+        .header-inner {
+            max-width: 1100px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .brand {
+            color: #d84f99;
+            font-size: 19px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        nav {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #65465a;
+            font-size: 14px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            color: #e653a0;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 55px 20px;
+            color: #57384b;
+            background:
+                linear-gradient(#ffe6f2d9, #fff0f8e8),
+                url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80");
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-label {
+            display: inline-block;
+            padding: 8px 14px;
+            border-radius: 30px;
+            background: #fff;
+            color: #d84f99;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .hero h1 {
+            margin: 15px 0 10px;
+            font-size: clamp(28px, 5vw, 38px);
+        }
+
+        .hero p {
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+
+        .message {
+            margin-bottom: 18px;
+            padding: 14px 16px;
+            border-radius: 10px;
+            color: #8b3970;
+            background: #fff;
+            border-left: 5px solid #e653a0;
+            box-shadow: 0 4px 14px #00000008;
+            overflow-wrap: anywhere;
+        }
+
+        .booking-card {
+            margin-bottom: 22px;
+            padding: 22px;
+            background: #fff;
+            border: 1px solid #f4dfeb;
+            border-radius: 17px;
+            box-shadow: 0 7px 22px #8c477014;
+        }
+
+        .booking-title {
+            margin: 0 0 17px;
+            color: #d84f99;
+            font-size: 21px;
+            line-height: 1.4;
+            overflow-wrap: anywhere;
+        }
+
+        .details {
+            padding: 18px;
+            background: #fff7fb;
+            border: 1px solid #f7e5ef;
+            border-radius: 12px;
+        }
+
+        .details p {
+            margin: 12px 0;
+            line-height: 1.6;
+            font-size: 14px;
+            overflow-wrap: anywhere;
+        }
+
+        .details p:first-child {
+            margin-top: 0;
+        }
+
+        .details p:last-child {
+            margin-bottom: 0;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .status-confirmed {
+            background: #e7f8ed;
+            color: #176b2c;
+        }
+
+        .status-pending {
+            background: #fff4d6;
+            color: #7a5a00;
+        }
+
+        .status-cancelled {
+            background: #ffe7e7;
+            color: #a00000;
+        }
+
+        .actions {
+            margin-top: 18px;
+        }
+
+        .cancel-form {
+            margin: 0;
+        }
+
+        .cancel-btn {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 9px;
+            background: #dc4668;
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .cancel-btn:hover {
+            background: #bd2f52;
+        }
+
+        .empty {
+            padding: 35px 20px;
+            text-align: center;
+            background: #fff;
+            border: 1px solid #f4dfeb;
+            border-radius: 17px;
+            box-shadow: 0 7px 22px #8c477014;
+        }
+
+        .empty-icon {
+            font-size: 52px;
+        }
+
+        .empty h2 {
+            color: #d84f99;
+            margin-bottom: 10px;
+        }
+
+        .empty p {
+            color: #806b7b;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .browse-btn {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 13px 20px;
+            border-radius: 9px;
+            background: #e653a0;
+            color: #fff;
+            font-weight: bold;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .browse-btn:hover {
+            background: #cc3987;
+        }
+
+        footer {
+            margin-top: 45px;
+            padding: 25px 15px;
+            background: #fff;
+            color: #806b7b;
+            text-align: center;
+            font-size: 12px;
+            line-height: 1.8;
+            border-top: 1px solid #f4dfeb;
+        }
+
+        footer strong {
+            color: #d84f99;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 16px;
+            }
+
+            .header-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav {
+                gap: 13px;
+            }
+
+            nav a {
+                font-size: 13px;
+            }
+
+            .hero {
+                padding: 40px 15px;
+            }
+
+            .container {
+                margin: 22px auto;
+                padding: 0 12px;
+            }
+
+            .booking-card {
+                padding: 15px;
+            }
+
+            .booking-title {
+                font-size: 19px;
+            }
+
+            .details {
+                padding: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-inner">
+        <a class="brand" href="{% url 'home' %}">
+            ✈️ WanderWay Travel & Tours
+        </a>
+
+        <nav>
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'tours' %}">Tours</a>
+            <a href="{% url 'my_bookings' %}">My Bookings</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <span class="hero-label">YOUR TRAVEL JOURNEY</span>
+    <h1>📋 My Bookings</h1>
+    <p>View and manage your tour reservations in one place.</p>
+</section>
+
+<main class="container">
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="message">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    {% if bookings %}
+
+        {% for booking in bookings %}
+
+            <article class="booking-card">
+
+                <h2 class="booking-title">
+                    🗺️ {{ booking.tour.name }}
+                </h2>
+
+                <div class="details">
+
+                    <p>
+                        📍 <strong>Destination:</strong>
+                        {{ booking.tour.destination }}
+                    </p>
+
+                    <p>
+                        👥 <strong>Number of People:</strong>
+                        {{ booking.number_of_people }}
+                    </p>
+
+                    <p>
+                        💵 <strong>Price per Person:</strong>
+                        ₱{{ booking.tour.price|floatformat:2 }}
+                    </p>
+
+                    <p>
+                        💰 <strong>Total Amount:</strong>
+                        ₱{{ booking.tour.price|floatformat:2 }}
+                        × {{ booking.number_of_people }}
+                    </p>
+
+                    <p>
+                        📅 <strong>Booking Date:</strong>
+                        {{ booking.booking_date|date:"F d, Y - h:i A" }}
+                    </p>
+
+                    <p>
+                        📋 <strong>Status:</strong>
+
+                        {% if booking.status == "Confirmed" %}
+                            <span class="status status-confirmed">
+                                Confirmed
+                            </span>
+                        {% elif booking.status == "Pending" %}
+                            <span class="status status-pending">
+                                Pending
+                            </span>
+                        {% else %}
+                            <span class="status status-cancelled">
+                                {{ booking.status }}
+                            </span>
+                        {% endif %}
+                    </p>
+
+                </div>
+
+                {% if booking.status == "Confirmed" %}
+                    <div class="actions">
+                        <form
+                            method="POST"
+                            action="{% url 'cancel_booking' booking.id %}"
+                            class="cancel-form"
+                        >
+                            {% csrf_token %}
+
+                            <button
+                                type="submit"
+                                class="cancel-btn"
+                                onclick="return confirm('Are you sure you want to cancel this booking?');"
+                            >
+                                Cancel Booking
+                            </button>
+                        </form>
+                    </div>
+                {% endif %}
+
+            </article>
+
+        {% endfor %}
+
+    {% else %}
+
+        <section class="empty">
+            <div class="empty-icon">🏝️</div>
+
+            <h2>No Bookings Yet</h2>
+
+            <p>
+                You don't have any tour bookings yet.
+                Your next adventure is waiting for you!
+            </p>
+
+            <a href="{% url 'tours' %}" class="browse-btn">
+                🏝️ Browse Tours
+            </a>
+        </section>
+
+    {% endif %}
+
+</main>
+
+<footer>
+    ✈️ <strong>WanderWay Travel & Tours</strong>
+    <br>
+    Explore. Book. Travel. 🌎
+</footer>
+
+</body>
+</html>

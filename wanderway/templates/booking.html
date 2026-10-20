@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Booking - WanderWay Travel & Tours</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #fff5f9;
+            color: #3d2934;
+        }
+
+        header {
+            background: linear-gradient(135deg, #ff5c9a, #d63384);
+            color: white;
+            padding: 22px 15px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 26px;
+        }
+
+        nav {
+            margin-top: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 8px;
+            font-weight: bold;
+            display: inline-block;
+            padding: 5px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #ff78ad, #d63384);
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+        }
+
+        .hero h2 {
+            margin: 0 0 10px;
+            font-size: 29px;
+        }
+
+        .hero p {
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 30px auto;
+            padding: 15px;
+        }
+
+        .booking-card {
+            background: white;
+            padding: 28px;
+            border: 1px solid #ffe0ec;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(214, 51, 132, 0.10);
+        }
+
+        .notice {
+            background: #fff0f6;
+            color: #96345f;
+            border-left: 4px solid #ff5c9a;
+            padding: 16px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .details {
+            background: #fff8fb;
+            padding: 22px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ffd6e7;
+        }
+
+        .details h3 {
+            color: #c72572;
+            margin-top: 0;
+            font-size: 22px;
+            overflow-wrap: anywhere;
+        }
+
+        .details p {
+            margin: 12px 0;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+        }
+
+        .details strong {
+            color: #b52b70;
+        }
+
+        .total {
+            background: #fff0f6;
+            border: 1px solid #ffd6e7;
+            padding: 22px 15px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 25px 0;
+        }
+
+        .total-label {
+            margin: 0 0 10px;
+            font-weight: bold;
+            color: #806575;
+        }
+
+        .total-amount {
+            margin: 0;
+            font-size: 30px;
+            font-weight: bold;
+            color: #d63384;
+            overflow-wrap: anywhere;
+        }
+
+        button,
+        .back-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        button {
+            background: linear-gradient(135deg, #ff5c9a, #d63384);
+            color: white;
+        }
+
+        button:hover {
+            background: #c72572;
+        }
+
+        .back-btn {
+            background: #fff0f6;
+            border: 1px solid #ffd0e2;
+            color: #b52b70;
+            margin-top: 12px;
+        }
+
+        .back-btn:hover {
+            background: #ffe0ec;
+        }
+
+        footer {
+            background: #c72572;
+            color: white;
+            text-align: center;
+            padding: 24px 15px;
+            margin-top: 45px;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 22px;
+            }
+
+            nav a {
+                margin: 4px;
+                font-size: 14px;
+            }
+
+            .hero {
+                padding: 28px 15px;
+            }
+
+            .hero h2 {
+                font-size: 24px;
+            }
+
+            .container {
+                margin: 20px auto;
+                padding: 12px;
+            }
+
+            .booking-card {
+                padding: 18px;
+            }
+
+            .details {
+                padding: 17px;
+            }
+
+            .total-amount {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>✈️ WanderWay Travel & Tours</h1>
+
+    <nav>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'tours' %}">Tours</a>
+
+        {% if user.is_authenticated %}
+            <a href="{% url 'my_bookings' %}">My Bookings</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        {% endif %}
+    </nav>
+</header>
+
+<section class="hero">
+    <h2>📋 Confirm Your Booking</h2>
+    <p>Review your details before proceeding to payment.</p>
+</section>
+
+<div class="container">
+    <div class="booking-card">
+
+        <div class="notice">
+            🔎 <strong>Please check your booking details.</strong>
+            <br>
+            Make sure all information is correct before
+            continuing to the payment page.
+        </div>
+
+        <div class="details">
+            <h3>🗺️ {{ tour.name }}</h3>
+
+            <p>
+                📍 <strong>Destination:</strong>
+                {{ tour.destination }}
+            </p>
+
+            <p>
+                ⏱️ <strong>Duration:</strong>
+                {{ tour.duration }}
+            </p>
+
+            <p>
+                👤 <strong>Customer:</strong>
+                {{ user.get_full_name|default:user.username }}
+            </p>
+
+            <p>
+                👥 <strong>Number of People:</strong>
+                {{ number_of_people }}
+            </p>
+
+            <p>
+                💰 <strong>Price per Person:</strong>
+                ₱{{ tour.price|floatformat:2 }}
+            </p>
+        </div>
+
+        <div class="total">
+            <p class="total-label">💳 Total Booking Amount</p>
+
+            <p class="total-amount">
+                ₱{{ total_price|floatformat:2 }}
+            </p>
+        </div>
+
+        <form
+            method="POST"
+            action="{% url 'confirm_booking' tour.id %}"
+        >
+            {% csrf_token %}
+
+            <input
+                type="hidden"
+                name="number_of_people"
+                value="{{ number_of_people }}"
+            >
+
+            <button type="submit">
+                Confirm Booking & Continue →
+            </button>
+        </form>
+
+        <a
+            href="{% url 'book_tour' tour.id %}"
+            class="back-btn"
+        >
+            ← Back to Booking
+        </a>
+
+    </div>
+</div>
+
+<footer>
+    ✈️ <strong>WanderWay Travel & Tours</strong>
+    <br>
+    Explore. Book. Travel. 🌎
+</footer>
+
+</body>
+</html>

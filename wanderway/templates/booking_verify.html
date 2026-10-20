@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Verify Booking - WanderWay Travel & Tours</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #fff5f9;
+            color: #3d2934;
+        }
+
+        header {
+            background: linear-gradient(135deg, #ff5c9a, #d63384);
+            color: white;
+            text-align: center;
+            padding: 22px 15px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 26px;
+        }
+
+        .box {
+            width: calc(100% - 30px);
+            max-width: 620px;
+            margin: 35px auto;
+            background: white;
+            padding: 28px;
+            border: 1px solid #ffe0ec;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(214, 51, 132, 0.10);
+        }
+
+        h2 {
+            text-align: center;
+            color: #d63384;
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+
+        .notice {
+            background: #fff0f6;
+            color: #96345f;
+            border-left: 4px solid #ff5c9a;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+
+        .details {
+            background: #fff8fb;
+            border: 1px solid #ffd6e7;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .details p {
+            margin: 12px 0;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+        }
+
+        .details strong {
+            color: #b52b70;
+        }
+
+        .total {
+            text-align: center;
+            background: #fff0f6;
+            border-radius: 12px;
+            padding: 20px 12px;
+            margin: 25px 0;
+        }
+
+        .total-label {
+            color: #806575;
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+
+        .total-amount {
+            font-size: 29px;
+            font-weight: bold;
+            color: #d63384;
+        }
+
+        .total-breakdown {
+            color: #806575;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        button,
+        .back {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #ff5c9a, #d63384);
+        }
+
+        button:hover {
+            background: #c72572;
+        }
+
+        .back {
+            background: #fff0f6;
+            border: 1px solid #ffd0e2;
+            color: #b52b70;
+        }
+
+        .back:hover {
+            background: #ffe0ec;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 22px;
+            }
+
+            .box {
+                margin: 22px auto;
+                padding: 20px;
+                border-radius: 16px;
+            }
+
+            .total-amount {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>✈️ WanderWay Travel & Tours</h1>
+</header>
+
+<div class="box">
+
+    <h2>📋 Verify Your Booking</h2>
+
+    <div class="notice">
+        ⚠️ Please review your booking details
+        before proceeding to payment.
+    </div>
+
+    <div class="details">
+
+        <p>
+            <strong>Tour:</strong>
+            {{ tour.name }}
+        </p>
+
+        <p>
+            <strong>📍 Destination:</strong>
+            {{ tour.destination }}
+        </p>
+
+        <p>
+            <strong>⏱ Duration:</strong>
+            {{ tour.duration }}
+        </p>
+
+        <p>
+            <strong>👥 Number of People:</strong>
+            {{ number_of_people }}
+        </p>
+
+        <p>
+            <strong>💰 Price per Person:</strong>
+            ₱{{ tour.price|floatformat:2 }}
+        </p>
+
+        <p>
+            <strong>🪑 Available Slots:</strong>
+            {{ tour.available_slots }}
+        </p>
+
+    </div>
+
+    <div class="total">
+        <div class="total-label">Total Booking Cost</div>
+
+        <div class="total-amount">
+            ₱{{ total_price|floatformat:2 }}
+        </div>
+
+        <div class="total-breakdown">
+            ₱{{ tour.price|floatformat:2 }}
+            × {{ number_of_people }} people
+        </div>
+    </div>
+
+    <form
+        method="POST"
+        action="{% url 'confirm_booking' tour.id %}"
+    >
+        {% csrf_token %}
+
+        <input
+            type="hidden"
+            name="number_of_people"
+            value="{{ number_of_people }}"
+        >
+
+        <button type="submit">
+            Proceed to Payment →
+        </button>
+    </form>
+
+    <a
+        href="{% url 'book_tour' tour.id %}"
+        class="back"
+    >
+        ← Back to Booking
+    </a>
+
+</div>
+
+</body>
+</html>

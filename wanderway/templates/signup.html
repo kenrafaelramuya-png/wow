@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | WanderWay Travel & Tours</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --pink: #ed5b9f;
+            --pink-dark: #d83f87;
+            --pink-light: #fff0f7;
+            --text: #383044;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            color: var(--text);
+            background: #fff5fa;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            padding: 18px 5%;
+            background: rgba(255, 255, 255, 0.97);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 15px rgba(100, 40, 70, 0.06);
+        }
+
+        .brand {
+            color: var(--pink-dark);
+            font-size: 21px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+        }
+
+        nav a {
+            color: #594653;
+            font-size: 14px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: var(--pink-dark);
+        }
+
+        .main {
+            flex: 1;
+            padding: 40px 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background:
+                linear-gradient(
+                    110deg,
+                    rgba(255, 222, 239, 0.93),
+                    rgba(255, 244, 249, 0.84)
+                ),
+                url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=85")
+                center / cover no-repeat;
+        }
+
+        .layout {
+            width: 100%;
+            max-width: 1000px;
+            display: grid;
+            grid-template-columns: 1fr 460px;
+            align-items: center;
+            gap: 35px;
+        }
+
+        .welcome {
+            padding: 20px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 9px 14px;
+            border-radius: 30px;
+            background: white;
+            color: var(--pink-dark);
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .welcome h1 {
+            color: #63314d;
+            font-size: clamp(32px, 5vw, 50px);
+            line-height: 1.15;
+            margin: 22px 0 15px;
+        }
+
+        .welcome h1 span {
+            color: var(--pink-dark);
+        }
+
+        .welcome p {
+            color: #634f5d;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .box {
+            width: 100%;
+            padding: 30px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.97);
+            box-shadow: 0 15px 45px rgba(111, 43, 79, 0.15);
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 12px;
+            display: grid;
+            place-items: center;
+            border-radius: 16px;
+            background: var(--pink-light);
+            font-size: 27px;
+        }
+
+        h2 {
+            margin: 0 0 10px;
+            text-align: center;
+            color: #63314d;
+            font-size: 26px;
+        }
+
+        .subtitle {
+            margin: 0 0 20px;
+            color: #81717c;
+            font-size: 14px;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        label {
+            display: block;
+            margin: 13px 0 7px;
+            color: #51404b;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        input {
+            display: block;
+            width: 100%;
+            min-height: 45px;
+            padding: 11px 13px;
+            border: 1px solid #eadce4;
+            border-radius: 10px;
+            background: #fffafd;
+            color: var(--text);
+            font-size: 16px;
+        }
+
+        input:focus {
+            outline: 2px solid #f7b6d4;
+            border-color: var(--pink);
+        }
+
+        button {
+            width: 100%;
+            min-height: 49px;
+            margin-top: 22px;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: var(--pink);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: var(--pink-dark);
+        }
+
+        .error {
+            margin-bottom: 15px;
+            padding: 12px;
+            border: 1px solid #ffd0d0;
+            border-radius: 9px;
+            background: #fff0f0;
+            color: #a12640;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .login {
+            margin-top: 20px;
+            color: #81717c;
+            text-align: center;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .login a {
+            color: var(--pink-dark);
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .login a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            padding: 18px;
+            background: white;
+            color: #81717c;
+            text-align: center;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 760px) {
+            header {
+                justify-content: center;
+                text-align: center;
+            }
+
+            nav {
+                justify-content: center;
+                gap: 14px;
+            }
+
+            .main {
+                padding: 25px 15px;
+            }
+
+            .layout {
+                max-width: 460px;
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .welcome {
+                padding: 8px 5px;
+                text-align: center;
+            }
+
+            .welcome h1 {
+                margin: 14px 0 8px;
+                font-size: 31px;
+            }
+
+            .welcome p {
+                margin: 0 auto;
+                font-size: 14px;
+            }
+
+            .box {
+                padding: 26px 21px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <a class="brand" href="{% url 'home' %}">
+        ✈️ WanderWay Travel & Tours
+    </a>
+
+    <nav>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'tours' %}">Tours</a>
+
+        {% if user.is_authenticated %}
+            <a href="{% url 'my_bookings' %}">My Bookings</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'signup' %}">Sign Up</a>
+        {% endif %}
+    </nav>
+</header>
+
+<main class="main">
+    <div class="layout">
+
+        <section class="welcome">
+            <span class="tag">✦ YOUR JOURNEY STARTS HERE</span>
+
+            <h1>
+                Discover more.
+                <span>Travel further.</span>
+            </h1>
+
+            <p>
+                Create your WanderWay account and start exploring
+                exciting destinations, tour packages, and new adventures.
+            </p>
+        </section>
+
+        <section class="box">
+            <div class="logo">✈️</div>
+
+            <h2>Create Your Account</h2>
+
+            <p class="subtitle">
+                Join WanderWay and plan your next adventure!
+            </p>
+
+            {% if error %}
+                <div class="error">{{ error }}</div>
+            {% endif %}
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <label for="first_name">First Name</label>
+                <input
+                    type="text"
+                    id="first_name"
+                    name="first_name"
+                    placeholder="Enter your first name"
+                    autocomplete="given-name"
+                    required
+                >
+
+                <label for="last_name">Last Name</label>
+                <input
+                    type="text"
+                    id="last_name"
+                    name="last_name"
+                    placeholder="Enter your last name"
+                    autocomplete="family-name"
+                    required
+                >
+
+                <label for="username">Username</label>
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Choose a username"
+                    autocomplete="username"
+                    required
+                >
+
+                <label for="email">Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    autocomplete="email"
+                    required
+                >
+
+                <label for="phone_number">Phone Number</label>
+                <input
+                    type="tel"
+                    id="phone_number"
+                    name="phone_number"
+                    placeholder="09XXXXXXXXX"
+                    maxlength="20"
+                    autocomplete="tel"
+                    required
+                >
+
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="At least 8 characters"
+                    minlength="8"
+                    autocomplete="new-password"
+                    required
+                >
+
+                <button type="submit">Create My Account →</button>
+            </form>
+
+            <div class="login">
+                Already have an account?
+                <a href="{% url 'login' %}">Log In</a>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<footer>
+    ✈️ WanderWay Travel & Tours<br>
+    Explore. Book. Travel. 🌎
+</footer>
+
+</body>
+</html>

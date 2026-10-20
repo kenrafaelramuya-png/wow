@@ -1,0 +1,315 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour Packages | WanderWay Travel & Tours</title>
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #57384b;
+            background: linear-gradient(135deg, #fff7fb, #fde8f2);
+        }
+
+        nav {
+            background: white;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            box-shadow: 0 2px 12px #0000000d;
+        }
+
+        .brand {
+            color: #d84f99;
+            font-size: 19px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: #65465a;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover { color: #e653a0; }
+
+        .hero {
+            padding: 65px 20px;
+            text-align: center;
+            background:
+                linear-gradient(#ffe6f2bb, #fff0f8dd),
+                url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=80");
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-label {
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 30px;
+            background: white;
+            color: #d84f99;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .hero h1 {
+            margin: 18px 0 10px;
+            font-size: clamp(28px, 5vw, 42px);
+        }
+
+        .hero p {
+            max-width: 600px;
+            margin: auto;
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        .section-heading {
+            text-align: center;
+            padding: 28px 15px 10px;
+        }
+
+        .section-heading h2 { margin-bottom: 8px; }
+
+        .section-heading p {
+            color: #8b7484;
+            font-size: 13px;
+        }
+
+        .tour-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            max-width: 1200px;
+            padding: 15px;
+            margin: auto;
+        }
+
+        .tour-card {
+            min-width: 0;
+            overflow: hidden;
+            background: white;
+            border-radius: 15px;
+            border: 1px solid #f5e5ef;
+            box-shadow: 0 7px 20px #8c477018;
+        }
+
+        .tour-photo {
+            height: 155px;
+            background-size: cover;
+            background-position: center;
+            background-color: #f2dce9;
+        }
+
+        .tour-content { padding: 15px; }
+
+        .tour-content h3 {
+            margin: 0 0 12px;
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+        .tour-content p {
+            color: #776b74;
+            font-size: 12px;
+            line-height: 1.65;
+            overflow-wrap: anywhere;
+        }
+
+        .price {
+            margin: 14px 0;
+            color: #d84f99;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .slots {
+            margin: 12px 0;
+            padding: 10px;
+            border-radius: 7px;
+            background: #fff1f8;
+            font-size: 11px;
+        }
+
+        .book-btn, .disabled-btn {
+            display: block;
+            width: 100%;
+            padding: 12px 8px;
+            border: none;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .book-btn {
+            color: white;
+            background: #e653a0;
+        }
+
+        .book-btn:hover { background: #cc3987; }
+
+        .disabled-btn {
+            color: #777;
+            background: #efedf0;
+        }
+
+        .empty-message {
+            grid-column: 1 / -1;
+            padding: 35px 15px;
+            text-align: center;
+            color: #806b7b;
+        }
+
+        footer {
+            margin-top: 30px;
+            padding: 25px 15px;
+            text-align: center;
+            color: #8b7484;
+            font-size: 12px;
+        }
+
+        @media (max-width: 760px) {
+            .tour-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 12px;
+                padding: 12px;
+            }
+
+            .tour-photo { height: 135px; }
+            .tour-content { padding: 12px; }
+        }
+
+        @media (max-width: 380px) {
+            .tour-grid { grid-template-columns: 1fr; }
+            .tour-photo { height: 190px; }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <a class="brand" href="{% url 'home' %}">
+        ✈️ WanderWay Travel & Tours
+    </a>
+
+    <div class="nav-links">
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'tours' %}">Tours</a>
+
+        {% if user.is_authenticated %}
+            <a href="{% url 'my_bookings' %}">My Bookings</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'signup' %}">Sign Up</a>
+        {% endif %}
+    </div>
+</nav>
+
+<header class="hero">
+    <span class="hero-label">✦ FIND YOUR NEXT ADVENTURE</span>
+    <h1>Explore Beautiful Destinations</h1>
+    <p>
+        Discover amazing places, find your perfect tour package,
+        and create unforgettable memories with WanderWay.
+    </p>
+</header>
+
+<section class="section-heading">
+    <h2>Our Tour Packages</h2>
+    <p>Choose your destination and start your next adventure.</p>
+</section>
+
+<main class="tour-grid">
+
+    {% for tour in tours %}
+        <article class="tour-card">
+
+            <div class="tour-photo"
+                {% if "mayon" in tour.name|lower %}
+                    style="background-image: url('{% static 'images/mayon.jpg' %}');"
+                {% elif "bantayan" in tour.name|lower %}
+                    style="background-image: url('{% static 'images/bantayan.jpg' %}');"
+                {% elif "coron" in tour.name|lower %}
+                    style="background-image: url('https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=900&q=80');"
+                {% elif "camiguin" in tour.name|lower %}
+                    style="background-image: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=900&q=80');"
+                {% elif "sagada" in tour.name|lower %}
+                    style="background-image: url('https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=900&q=80');"
+                {% elif "boracay" in tour.name|lower %}
+                    style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80');"
+                {% elif "palawan" in tour.name|lower %}
+                    style="background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=900&q=80');"
+                {% elif "cebu" in tour.name|lower %}
+                    style="background-image: url('https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=900&q=80');"
+                {% elif "siargao" in tour.name|lower %}
+                    style="background-image: url('https://images.unsplash.com/photo-1455729552865-3658a5d39692?auto=format&fit=crop&w=900&q=80');"
+                {% elif "bohol" in tour.name|lower %}
+                    style="background-image: url('https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=900&q=80');"
+                {% elif "el nido" in tour.name|lower %}
+                    style="background-image: url('https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=900&q=80');"
+                {% else %}
+                    style="background-image: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=900&q=80');"
+                {% endif %}>
+            </div>
+
+            <div class="tour-content">
+                <h3>{{ tour.name }}</h3>
+
+                <p>📍 Destination: {{ tour.destination }}</p>
+                <p>⏱ Duration: {{ tour.duration }}</p>
+
+                <div class="price">
+                    ₱{{ tour.price|floatformat:2 }}
+                </div>
+
+                <div class="slots">
+                    🎟 Available Slots: {{ tour.available_slots }}
+                </div>
+
+                <p>{{ tour.description }}</p>
+
+                {% if tour.available_slots > 0 %}
+                    <a class="book-btn"
+                       href="{% url 'book_tour' tour.id %}">
+                        Book This Tour →
+                    </a>
+                {% else %}
+                    <div class="disabled-btn">Fully Booked</div>
+                {% endif %}
+            </div>
+
+        </article>
+    {% empty %}
+        <div class="empty-message">
+            <h3>No tour packages available yet.</h3>
+            <p>Please check again later.</p>
+        </div>
+    {% endfor %}
+
+</main>
+
+<footer>
+    © {% now "Y" %} WanderWay Travel & Tours. Explore your world.
+</footer>
+
+</body>
+</html>

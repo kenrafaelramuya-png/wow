@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | WanderWay Travel & Tours</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --pink: #ed5b9f;
+            --pink-dark: #d83f87;
+            --pink-light: #fff0f7;
+            --text: #383044;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            color: var(--text);
+            background: #fff5fa;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            padding: 18px 5%;
+            background: rgba(255, 255, 255, 0.96);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 15px rgba(100, 40, 70, 0.06);
+        }
+
+        .brand {
+            color: var(--pink-dark);
+            font-size: 21px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+        }
+
+        nav a {
+            color: #594653;
+            font-size: 14px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: var(--pink-dark);
+        }
+
+        .main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 45px 18px;
+            background:
+                linear-gradient(
+                    110deg,
+                    rgba(255, 222, 239, 0.93),
+                    rgba(255, 244, 249, 0.82)
+                ),
+                url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=85")
+                center / cover no-repeat;
+        }
+
+        .login-layout {
+            width: 100%;
+            max-width: 950px;
+            display: grid;
+            grid-template-columns: 1fr 410px;
+            align-items: center;
+            gap: 35px;
+        }
+
+        .welcome {
+            padding: 20px;
+        }
+
+        .welcome .tag {
+            display: inline-block;
+            background: white;
+            color: var(--pink-dark);
+            padding: 9px 15px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .welcome h1 {
+            font-size: clamp(32px, 5vw, 52px);
+            line-height: 1.12;
+            margin: 22px 0 15px;
+            color: #63314d;
+        }
+
+        .welcome h1 span {
+            color: var(--pink-dark);
+        }
+
+        .welcome p {
+            max-width: 440px;
+            font-size: 16px;
+            line-height: 1.8;
+            color: #634f5d;
+        }
+
+        .card {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.97);
+            padding: 34px 30px;
+            border-radius: 22px;
+            box-shadow: 0 15px 45px rgba(111, 43, 79, 0.15);
+        }
+
+        .logo {
+            width: 55px;
+            height: 55px;
+            display: grid;
+            place-items: center;
+            margin: 0 auto 16px;
+            border-radius: 17px;
+            background: var(--pink-light);
+            font-size: 29px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 27px;
+            margin: 0 0 10px;
+            color: #63314d;
+        }
+
+        .subtitle {
+            color: #81717c;
+            text-align: center;
+            line-height: 1.6;
+            font-size: 14px;
+            margin: 0 0 24px;
+        }
+
+        label {
+            display: block;
+            margin: 16px 0 8px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #51404b;
+        }
+
+        input {
+            display: block;
+            width: 100%;
+            min-height: 48px;
+            padding: 13px 14px;
+            border: 1px solid #eadce4;
+            border-radius: 10px;
+            background: #fffafd;
+            color: var(--text);
+            font-size: 16px;
+        }
+
+        input:focus {
+            outline: 2px solid #f7b6d4;
+            border-color: var(--pink);
+        }
+
+        button {
+            width: 100%;
+            min-height: 49px;
+            margin-top: 24px;
+            border: none;
+            border-radius: 10px;
+            background: var(--pink);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: var(--pink-dark);
+        }
+
+        .message {
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 9px;
+            background: #fff0f0;
+            border: 1px solid #ffd0d0;
+            color: #a12640;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .bottom {
+            margin-top: 23px;
+            text-align: center;
+            color: #81717c;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .bottom a {
+            color: var(--pink-dark);
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .bottom a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            padding: 18px;
+            background: white;
+            text-align: center;
+            color: #81717c;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 760px) {
+            header {
+                justify-content: center;
+                text-align: center;
+            }
+
+            nav {
+                justify-content: center;
+                gap: 14px;
+            }
+
+            .main {
+                padding: 28px 16px;
+            }
+
+            .login-layout {
+                max-width: 430px;
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .welcome {
+                text-align: center;
+                padding: 8px 5px;
+            }
+
+            .welcome h1 {
+                font-size: 32px;
+                margin: 15px 0 10px;
+            }
+
+            .welcome p {
+                margin: 0 auto;
+                font-size: 14px;
+            }
+
+            .card {
+                padding: 28px 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <a class="brand" href="{% url 'home' %}">
+        ✈️ WanderWay Travel & Tours
+    </a>
+
+    <nav>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'tours' %}">Tours</a>
+
+        {% if user.is_authenticated %}
+            <a href="{% url 'my_bookings' %}">My Bookings</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'signup' %}">Sign Up</a>
+        {% endif %}
+    </nav>
+</header>
+
+<main class="main">
+    <div class="login-layout">
+
+        <section class="welcome">
+            <span class="tag">✦ YOUR NEXT ADVENTURE STARTS HERE</span>
+
+            <h1>
+                The world is waiting.
+                <span>Let's explore!</span>
+            </h1>
+
+            <p>
+                Welcome back to WanderWay. Sign in to discover tour
+                packages, manage your bookings, and plan your next trip.
+            </p>
+        </section>
+
+        <section class="card">
+            <div class="logo">✈️</div>
+
+            <h2>Welcome Back!</h2>
+
+            <p class="subtitle">
+                Log in to your account to continue your journey.
+            </p>
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="message">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+
+            {% if error %}
+                <div class="message">{{ error }}</div>
+            {% endif %}
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <label for="username">Username</label>
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Enter your username"
+                    autocomplete="username"
+                    required
+                >
+
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required
+                >
+
+                <button type="submit">Login to Your Account →</button>
+            </form>
+
+            <div class="bottom">
+                Don't have an account?
+                <a href="{% url 'signup' %}">Create an account</a>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<footer>
+    ✈️ WanderWay Travel & Tours<br>
+    Explore. Book. Travel. 🌎
+</footer>
+
+</body>
+</html>

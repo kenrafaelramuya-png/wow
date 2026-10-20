@@ -1,0 +1,714 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WanderWay Travel & Tours</title>
+
+    <style>
+        :root {
+            --pink: #d92e7c;
+            --dark-pink: #a81759;
+            --light-pink: #fff0f7;
+            --text: #402638;
+            --muted: #795e70;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #fff5fa;
+            color: var(--text);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* NAVIGATION */
+        header {
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 250, 253, 0.98);
+            border-bottom: 1px solid #ffd8e9;
+            box-shadow: 0 4px 18px rgba(168, 23, 89, 0.08);
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: auto;
+            padding: 16px 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--dark-pink);
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .brand-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            color: white;
+            background: linear-gradient(135deg, #ed4b99, #ad1457);
+            font-size: 24px;
+        }
+
+        .brand small {
+            display: block;
+            margin-top: 4px;
+            font-size: 10px;
+            letter-spacing: 2px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #69344f;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        nav a:hover {
+            color: var(--pink);
+        }
+
+        .nav-signup {
+            padding: 11px 18px;
+            border-radius: 8px;
+            background: var(--pink);
+            color: white;
+        }
+
+        /* HERO BACKGROUND */
+        .hero {
+            max-width: 1200px;
+            min-height: 400px;
+            margin: 22px auto;
+            padding: 55px 35px;
+            border-radius: 22px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(112, 18, 66, 0.78),
+                    rgba(181, 25, 100, 0.35),
+                    rgba(255, 100, 170, 0.08)
+                ),
+                url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=85")
+                center / cover no-repeat;
+            box-shadow: 0 12px 30px rgba(168, 23, 89, 0.15);
+        }
+
+        .hero-content {
+            max-width: 650px;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            padding: 8px 13px;
+            border: 1px solid rgba(255, 255, 255, 0.65);
+            border-radius: 30px;
+            color: white;
+            background: rgba(255, 255, 255, 0.14);
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .hero h1 {
+            margin: 20px 0 15px;
+            color: white;
+            font-size: clamp(34px, 5vw, 58px);
+            line-height: 1.12;
+            text-shadow: 0 3px 12px rgba(70, 0, 35, 0.35);
+        }
+
+        .hero h1 span {
+            color: #ffd0e5;
+            font-style: italic;
+        }
+
+        .hero p {
+            max-width: 540px;
+            color: white;
+            font-size: 17px;
+            line-height: 1.8;
+            text-shadow: 0 2px 6px rgba(50, 0, 25, 0.45);
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 20px;
+            border: 0;
+            border-radius: 9px;
+            background: linear-gradient(120deg, #d92e7c, #f24e9a);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 16px rgba(168, 23, 89, 0.22);
+        }
+
+        .btn-light {
+            background: white;
+            color: var(--dark-pink);
+        }
+
+        /* SEARCH PANEL */
+        .search-panel {
+            position: relative;
+            z-index: 1;
+            max-width: 1050px;
+            margin: -45px auto 35px;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+            align-items: end;
+            gap: 14px;
+            border: 1px solid #ffe0ed;
+            border-radius: 15px;
+            background: white;
+            box-shadow: 0 12px 30px rgba(100, 20, 60, 0.12);
+        }
+
+        .search-field label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark-pink);
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .search-field input,
+        .search-field select {
+            width: 100%;
+            min-height: 42px;
+            padding: 10px;
+            border: 1px solid #ead7e1;
+            border-radius: 8px;
+            background: white;
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        /* GENERAL SECTIONS */
+        .section {
+            max-width: 1200px;
+            margin: 55px auto;
+            padding: 0 22px;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 22px;
+            flex-wrap: wrap;
+        }
+
+        .section-heading h2 {
+            margin: 0 0 8px;
+            color: var(--dark-pink);
+            font-size: 27px;
+        }
+
+        .section-heading p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .text-link {
+            color: var(--pink);
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* DESTINATION CARDS */
+        .destination-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .destination-card {
+            overflow: hidden;
+            border: 1px solid #f8dce8;
+            border-radius: 15px;
+            background: white;
+            box-shadow: 0 7px 20px rgba(168, 23, 89, 0.07);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 26px rgba(168, 23, 89, 0.14);
+        }
+
+        .destination-image {
+            width: 100%;
+            height: 155px;
+            display: block;
+            object-fit: cover;
+            background: #f7dce9;
+        }
+
+        .destination-info {
+            padding: 15px;
+        }
+
+        .destination-info h3 {
+            margin: 0 0 6px;
+            color: #54283f;
+            font-size: 17px;
+        }
+
+        .destination-info p {
+            margin: 0 0 12px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .destination-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .destination-price {
+            color: var(--dark-pink);
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .round-arrow {
+            width: 32px;
+            height: 32px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background: var(--pink);
+            color: white;
+            font-weight: bold;
+        }
+
+        /* BENEFITS */
+        .benefits {
+            padding: 32px 22px;
+            background: linear-gradient(110deg, #ffe1ef, #fff0f7, #ffd9e9);
+        }
+
+        .benefit-grid {
+            max-width: 1150px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 25px;
+        }
+
+        .benefit {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .benefit-icon {
+            width: 52px;
+            height: 52px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            background: white;
+            color: var(--pink);
+            font-size: 26px;
+        }
+
+        .benefit h3 {
+            margin: 0 0 6px;
+            color: var(--dark-pink);
+            font-size: 15px;
+        }
+
+        .benefit p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        /* FEATURE CARDS */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .feature-card {
+            padding: 28px 24px;
+            border: 1px solid #f8dce8;
+            border-radius: 16px;
+            background: white;
+            box-shadow: 0 7px 20px rgba(168, 23, 89, 0.06);
+            text-align: center;
+        }
+
+        .feature-icon {
+            width: 65px;
+            height: 65px;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 18px;
+            background: #ffe4f0;
+            font-size: 30px;
+        }
+
+        .feature-card h3 {
+            color: var(--dark-pink);
+        }
+
+        .feature-card p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* CALL TO ACTION */
+        .cta {
+            max-width: 1150px;
+            margin: 55px auto;
+            padding: 42px 25px;
+            border: 1px solid #ffd6e7;
+            border-radius: 20px;
+            background:
+                linear-gradient(
+                    100deg,
+                    rgba(255, 238, 247, 0.96),
+                    rgba(255, 210, 232, 0.92)
+                ),
+                url("https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1400&q=80")
+                center / cover no-repeat;
+            text-align: center;
+        }
+
+        .cta h2 {
+            margin-top: 0;
+            color: var(--dark-pink);
+            font-size: 28px;
+        }
+
+        .cta p {
+            color: #70475d;
+            line-height: 1.7;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 30px 20px;
+            background: linear-gradient(120deg, #92134b, #c52672);
+            color: white;
+            text-align: center;
+        }
+
+        footer p {
+            margin: 8px 0;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .destination-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .search-panel {
+                margin: 18px 20px 30px;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .hero {
+                margin: 15px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                justify-content: center;
+                padding: 15px;
+            }
+
+            nav {
+                justify-content: center;
+                gap: 12px;
+            }
+
+            nav a {
+                font-size: 13px;
+            }
+
+            .hero {
+                min-height: 360px;
+                margin: 12px;
+                padding: 35px 22px;
+                background-position: center;
+            }
+
+            .hero h1 {
+                font-size: 35px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .search-panel {
+                margin: 18px 12px 25px;
+                padding: 15px;
+                grid-template-columns: 1fr;
+            }
+
+            .destination-grid {
+                gap: 12px;
+            }
+
+            .destination-image {
+                height: 115px;
+            }
+
+            .destination-info {
+                padding: 11px;
+            }
+
+            .destination-info h3 {
+                font-size: 14px;
+            }
+
+            .destination-price {
+                font-size: 11px;
+            }
+
+            .benefit-grid,
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .benefit-grid {
+                gap: 22px;
+            }
+
+            .section {
+                margin: 38px auto;
+                padding: 0 14px;
+            }
+
+            .section-heading h2 {
+                font-size: 23px;
+            }
+
+            .cta {
+                margin: 35px 12px;
+                padding: 30px 20px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="navbar">
+        <a href="{% url 'home' %}" class="brand">
+            <span class="brand-icon">✈</span>
+            <span>
+                WANDERWAY
+                <small>TRAVEL &amp; TOURS</small>
+            </span>
+        </a>
+
+        <nav>
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'tours' %}">Tours</a>
+
+            {% if user.is_authenticated %}
+                <a href="{% url 'my_bookings' %}">My Bookings</a>
+                <a href="{% url 'logout' %}">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}">Login</a>
+                <a href="{% url 'signup' %}" class="nav-signup">Sign Up</a>
+            {% endif %}
+        </nav>
+    </div>
+</header>
+
+<!-- HERO BANNER -->
+<section class="hero">
+    <div class="hero-content">
+        <span class="eyebrow">✈ YOUR JOURNEY, OUR PASSION</span>
+
+        <h1>
+            Explore the World<br>
+            with <span>Wanderway</span>
+        </h1>
+
+        {% if user.is_authenticated %}
+            <p>
+                Welcome back,
+                {{ user.first_name|default:user.username }}!
+                Discover your next unforgettable adventure.
+            </p>
+        {% else %}
+            <p>
+                Discover beautiful destinations, exciting adventures,
+                and unforgettable experiences with WanderWay Travel &amp; Tours.
+            </p>
+        {% endif %}
+
+        <div class="hero-buttons">
+            <a href="{% url 'tours' %}" class="btn">🏝️ Explore Tours</a>
+
+            {% if user.is_authenticated %}
+                <a href="{% url 'my_bookings' %}" class="btn btn-light">
+                    My Bookings
+                </a>
+            {% else %}
+                <a href="{% url 'signup' %}" class="btn btn-light">
+                    Get Started
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- POPULAR DESTINATIONS -->
+<section class="section">
+    <div class="section-heading">
+        <div>
+            <h2>Popular Destinations</h2>
+            <p>Discover beautiful places around the Philippines.</p>
+        </div>
+
+        <a href="{% url 'tours' %}" class="text-link">View All Tours →</a>
+    </div>
+
+    <div class="destination-grid">
+        <article class="destination-card">
+            <img
+                class="destination-image"
+                src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=700&q=80"
+                alt="Tropical beach in Boracay"
+                loading="lazy"
+            >
+            <div class="destination-info">
+                <h3>Boracay</h3>
+                <p>White sand and turquoise water</p>
+                <div class="destination-bottom">
+                    <span class="destination-price">Explore packages</span>
+                    <a href="{% url 'tours' %}" class="round-arrow" aria-label="Explore Boracay tours">→</a>
+                </div>
+            </div>
+        </article>
+
+        <article class="destination-card">
+            <img
+                class="destination-image"
+                src="https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&w=700&q=80"
+                alt="Mountain and tropical scenery"
+                loading="lazy"
+            >
+            <div class="destination-info">
+                <h3>Baguio</h3>
+                <p>Cool weather and mountain views</p>
+                <div class="destination-bottom">
+                    <span class="destination-price">Explore packages</span>
+                    <a href="{% url 'tours' %}" class="round-arrow" aria-label="Explore Baguio tours">→</a>
+                </div>
+            </div>
+        </article>
+
+        <article class="destination-card">
+            <img
+                class="destination-image"
+                src="https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=700&q=80"
+                alt="Tropical island scenery"
+                loading="lazy"
+            >
+            <div class="destination-info">
+                <h3>Palawan</h3>
+                <p>Island lagoons and limestone cliffs</p>
+                <div class="destination-bottom">
+                    <span class="destination-price">Explore packages</span>
+                    <a href="{% url 'tours' %}" class="round-arrow" aria-label="Explore Palawan tours">→</a>
+                </div>
+            </div>
+        </article>
+
+        <article class="destination-card">
+            <img
+                class="destination-image"
+                src="https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=700&q=80"
+                alt="Blue sea and tropical island"
+                loading="lazy"
+            >
+            <div class="destination-info">
+                <h3>Cebu</h3>
+                <p>Beaches, nature and island adventures</p>
+                <div class="destination-bottom">
+                    <span class="destination-price">Explore packages</span>
+                    <a href="{% url 'tours' %}" class="round-arrow" aria-label="Explore Cebu to

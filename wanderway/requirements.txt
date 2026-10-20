@@ -1,0 +1,36 @@
+Django==6.1.1
+tzdata==2026.5
+astroid==3.3.11
+audiostream==0.2
+cffi==2.0.0
+cmake @ file:///home/n0n3m4/Desktop/Pydroid/zBuildPrepared/cmake-3.31.5-py3-none-any.whl#sha256=0c372e231235ded65541b768b4450199bf9238b4e3dcdb8885f17c6d1f9007b6
+dill==0.4.1
+distro==1.9.0
+Django==6.1.1
+docutils==0.22.4
+filetype==1.2.0
+isort==6.1.0
+jedi==0.19.2
+Kivy==2.3.1
+lazy-object-proxy==0.0.0
+mccabe==0.7.0
+ninja @ file:///home/n0n3m4/Desktop/Pydroid/zBuildPrepared/ninja-1.12.1-py3-none-any.whl#sha256=369aa5ff36a1bbe7299b02cd6d67f2589e7fd3e3871303c13bafa62a87b5b4fc
+packaging==26.2
+parso==0.8.7
+pkgconfig==1.6.0
+platformdirs==4.9.6
+pybind11==3.0.4
+pycparser==3.0
+pygame==2.6.1
+Pygments==2.20.0
+pyjnius==1.7.0
+pylint==3.3.9
+PySDL2==0.9.17
+scikit-build==0.19.0
+setuptools==82.0.1
+six==1.17.0
+sqlparse==0.6.0
+tomlkit==0.15.0
+tzdata==2026.5
+wheel==0.47.0
+wrapt==2.1.2

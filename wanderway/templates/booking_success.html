@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Booking Confirmed - Wanderway Travel & Tours</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f4f8fb;
+            color: #222;
+        }
+
+        header {
+            background: #0b6e8e;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .confirmation {
+            max-width: 650px;
+            margin: 45px auto;
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+        }
+
+        .success {
+            text-align: center;
+        }
+
+        .check {
+            font-size: 55px;
+        }
+
+        h2 {
+            color: #0b6e8e;
+        }
+
+        .summary {
+            background: #f0f7fa;
+            padding: 20px;
+            margin-top: 25px;
+            border-radius: 8px;
+        }
+
+        .summary h3 {
+            color: #0b6e8e;
+        }
+
+        .summary p {
+            margin: 10px 0;
+        }
+
+        .total {
+            font-size: 22px;
+            font-weight: bold;
+            color: #0b6e8e;
+            border-top: 1px solid #ccc;
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+
+        .buttons {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 18px;
+            margin: 5px;
+            background: #0b6e8e;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .secondary {
+            background: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>✈️ Wanderway Travel & Tours</h1>
+</header>
+
+<div class="confirmation">
+
+    <div class="success">
+
+        <div class="check">✅</div>
+
+        <h2>Booking Confirmed!</h2>
+
+        <p>
+            Your tour booking has been successfully submitted.
+        </p>
+
+    </div>
+
+    {% if booking %}
+
+        <div class="summary">
+
+            <h3>📋 Booking Summary</h3>
+
+            <p>
+                <strong>Tour:</strong>
+                {{ booking.tour.name }}
+            </p>
+
+            <p>
+                <strong>📍 Destination:</strong>
+                {{ booking.tour.destination }}
+            </p>
+
+            <p>
+                <strong>👤 Username:</strong>
+                {{ booking.user.username }}
+            </p>
+
+            <p>
+                <strong>👥 Number of People:</strong>
+                {{ booking.number_of_people }}
+            </p>
+
+            <p>
+                <strong>⏱ Duration:</strong>
+                {{ booking.tour.duration }}
+            </p>
+
+            <p>
+                <strong>💰 Price per Person:</strong>
+                ₱{{ booking.tour.price }}
+            </p>
+
+            <p class="total">
+                Total Price:
+                ₱{{ total_price }}
+            </p>
+
+            <p>
+                <strong>📅 Booking Date:</strong>
+                {{ booking.booking_date }}
+            </p>
+
+        </div>
+
+    {% endif %}
+
+    <div class="buttons">
+
+        <button
+            class="button"
+            onclick="history.back()"
+        >
+            ← Back
+        </button>
+
+        <a class="button" href="{% url 'my_bookings' %}">
+            View My Bookings
+        </a>
+
+        <a class="button secondary" href="{% url 'tours' %}">
+            Browse More Tours
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

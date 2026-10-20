@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cancel Booking - Wanderway Travel & Tours</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f4f8fb;
+            color: #222;
+        }
+
+        header {
+            background: #0b6e8e;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .box {
+            max-width: 550px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+            text-align: center;
+        }
+
+        h2 {
+            color: #b00020;
+        }
+
+        .warning {
+            background: #fff4d6;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .timer {
+            background: #e8f7ed;
+            color: #176b36;
+            padding: 18px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .timer-title {
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+
+        #countdown {
+            font-size: 30px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .details {
+            background: #f0f7fa;
+            padding: 18px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .details p {
+            margin: 10px 0;
+        }
+
+        button,
+        .back {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 5px;
+        }
+
+        .cancel {
+            background: #b00020;
+        }
+
+        .back {
+            background: #555;
+        }
+
+        .cancel:hover {
+            background: #8f001a;
+        }
+
+        .back:hover {
+            background: #333;
+        }
+
+        .expired {
+            color: #b00020;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>✈️ Wanderway Travel & Tours</h1>
+</header>
+
+<div class="box">
+
+    <h2>⚠️ Cancel Booking?</h2>
+
+    <div class="warning">
+        <strong>
+            Are you sure you want to cancel this booking?
+        </strong>
+        <br>
+        You can only cancel within 3 hours after booking.
+    </div>
+
+    <div class="timer">
+
+        <div class="timer-title">
+            ⏳ Time remaining to cancel:
+        </div>
+
+        <div id="countdown">
+            00:00:00
+        </div>
+
+    </div>
+
+    <div class="details">
+
+        <p>
+            <strong>Tour:</strong>
+            {{ booking.tour.name }}
+        </p>
+
+        <p>
+            <strong>📍 Destination:</strong>
+            {{ booking.tour.destination }}
+        </p>
+
+        <p>
+            <strong>👥 Number of People:</strong>
+            {{ booking.number_of_people }}
+        </p>
+
+        <p>
+            <strong>💰 Price per Person:</strong>
+            ₱{{ booking.tour.price }}
+        </p>
+
+        <p>
+            <strong>📅 Booking Date:</strong>
+            {{ booking.booking_date }}
+        </p>
+
+        <p>
+            <strong>📌 Status:</strong>
+            Confirmed
+        </p>
+
+    </div>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <button
+            type="submit"
+            class="cancel"
+            id="cancelButton"
+        >
+             Yes, Cancel Booking
+        </button>
+
+        <a
+            href="{% url 'my_bookings' %}"
+            class="back"
+        >
+            ← Back to My Bookings
+        </a>
+
+    </form>
+
+</div>
+
+<script>
+
+let totalSeconds = Number(
+    "{{ total_seconds }}"
+);
+
+const countdown =
+    document.getElementById("countdown");
+
+const cancelButton =
+    document.getElementById("cancelButton");
+
+
+function updateCountdown() {
+
+    if (totalSeconds <= 0) {
+
+        countdown.textContent =
+            "00:00:00";
+
+        countdown.classList.add(
+            "expired"
+        );
+
+        cancelButton.disabled = true;
+
+        cancelButton.style.background =
+            "#777";
+
+        cancelButton.style.cursor =
+            "not-allowed";
+
+        cancelButton.textContent =
+            " Cancellation Expired";
+
+        return;
+    }
+
+    const hours =
+        Math.floor(
+            totalSeconds / 3600
+        );
+
+    const minutes =
+        Math.floor(
+            (totalSeconds % 3600) / 60
+        );
+
+    const seconds =
+        totalSeconds % 60;
+
+    countdown.textContent =
+        String(hours).padStart(2, "0") +
+        ":" +
+        String(minutes).padStart(2, "0") +
+        ":" +
+        String(seconds).padStart(2, "0");
+
+    totalSeconds--;
+
+    setTimeout(
+        updateCountdown,
+        1000
+    );
+}
+
+
+updateCountdown();
+
+</script>
+
+</body>
+</html>/html>

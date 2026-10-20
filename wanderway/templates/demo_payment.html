@@ -1,0 +1,251 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCash Payment - WanderWay</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f8ff;
+            color: #333;
+        }
+
+        header {
+            background: #0878f9;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 35px auto;
+            padding: 0 18px;
+        }
+
+        .payment-card {
+            background: white;
+            border-radius: 20px;
+            padding: 28px 22px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.10);
+            text-align: center;
+        }
+
+        .gcash-logo {
+            margin-bottom: 12px;
+        }
+
+        .gcash-logo img {
+            width: 75px;
+            height: 75px;
+            object-fit: contain;
+            border-radius: 16px;
+        }
+
+        .payment-card h2 {
+            margin: 5px 0 8px;
+            color: #0878f9;
+            font-size: 25px;
+        }
+
+        .subtitle {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 22px;
+        }
+
+        .details {
+            background: #f5f9ff;
+            border-radius: 14px;
+            padding: 17px;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 9px 0;
+            border-bottom: 1px solid #e1e8f0;
+            font-size: 14px;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .label {
+            color: #777;
+        }
+
+        .value {
+            font-weight: bold;
+            text-align: right;
+            color: #333;
+        }
+
+        .amount {
+            background: #0878f9;
+            color: white;
+            border-radius: 14px;
+            padding: 15px;
+            margin: 18px 0;
+        }
+
+        .amount small {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        .amount strong {
+            font-size: 25px;
+        }
+
+        button {
+            width: 100%;
+            border: none;
+            background: #0878f9;
+            color: white;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0668d8;
+        }
+
+        .back {
+            display: block;
+            margin-top: 16px;
+            text-decoration: none;
+            color: #0878f9;
+            font-size: 14px;
+        }
+
+        footer {
+            text-align: center;
+            color: #888;
+            font-size: 12px;
+            padding: 25px 10px;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 21px;
+            }
+
+            .container {
+                margin-top: 25px;
+            }
+
+            .payment-card {
+                padding: 25px 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>✈️ WanderWay Travel & Tours</h1>
+</header>
+
+<div class="container">
+
+    <div class="payment-card">
+
+        <div class="gcash-logo">
+            <img
+                src="{% static 'gcash-logo.png' %}"
+                alt="GCash"
+            >
+        </div>
+
+        <h2>GCash Payment</h2>
+
+        <div class="subtitle">
+            Review your payment details before confirming.
+        </div>
+
+        <div class="details">
+
+            <div class="detail-row">
+                <span class="label">Tour</span>
+                <span class="value">{{ booking.tour.name }}</span>
+            </div>
+
+            <div class="detail-row">
+                <span class="label">Destination</span>
+                <span class="value">{{ booking.tour.destination }}</span>
+            </div>
+
+            <div class="detail-row">
+                <span class="label">Number of People</span>
+                <span class="value">{{ booking.number_of_people }}</span>
+            </div>
+
+            <div class="detail-row">
+                <span class="label">Payment Method</span>
+                <span class="value">{{ payment.payment_method }}</span>
+            </div>
+
+            <div class="detail-row">
+                <span class="label">Status</span>
+                <span class="value">{{ payment.payment_status }}</span>
+            </div>
+
+        </div>
+
+        <div class="amount">
+            <small>Total Amount</small>
+            <strong>₱{{ payment.amount|floatformat:2 }}</strong>
+        </div>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <button type="submit">
+                Confirm Payment
+            </button>
+
+        </form>
+
+        <a
+            href="{% url 'my_bookings' %}"
+            class="back"
+        >
+            ← Back to My Bookings
+        </a>
+
+    </div>
+
+</div>
+
+<footer>
+    © 2026 WanderWay Travel & Tours<br>
+    Payment Simulation
+</footer>
+
+</body>
+</html>
